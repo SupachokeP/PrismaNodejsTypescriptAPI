@@ -1,0 +1,46 @@
+generator client {
+  provider        = "prisma-client-js"
+  output          = "./generated/prisma-client"
+  previewFeatures = ["filterJson", "fullTextIndex", "fullTextSearch", "relationJoins"]
+  binaryTargets   = ["native", "rhel-openssl-1.0.x"]
+}
+
+datasource db {
+  provider = "sqlserver"
+  url      = env("CONNECTIONSTRING")
+}
+
+model TB_otp {
+  RefCode  Int       @id(map: "PK__TB_otp__1C4F52A667378910")
+  UserID   String?   @db.VarChar(50)
+  Expire   DateTime?
+  TB_Users TB_Users? @relation(fields: [UserID], references: [UserID], onDelete: NoAction, onUpdate: NoAction, map: "FK__TB_otp__UserID__412EB0B6")
+}
+
+model TB_UserRole {
+  UserID   String   @db.VarChar(50)
+  RoleID   String   @db.VarChar(50)
+  TBM_Role TBM_Role @relation(fields: [RoleID], references: [RoleID], onUpdate: NoAction, map: "FK__TB_UserRo__RoleI__3E52440B")
+  TB_Users TB_Users @relation(fields: [UserID], references: [UserID], onUpdate: NoAction, map: "FK__TB_UserRo__UserI__3D5E1FD2")
+
+  @@id([UserID, RoleID], map: "PK__TB_UserR__AF27604FA880CB92")
+}
+
+model TB_Users {
+  UserID       String        @id(map: "PK__TB_Users__1788CCAC84A64C1B") @db.VarChar(50)
+  Email        String        @unique(map: "UQ__TB_Users__A9D10534EED850F3") @db.VarChar(100)
+  Password     String        @db.NVarChar(100)
+  Phone        String        @db.VarChar(10)
+  FirstName    String        @db.VarChar(50)
+  LastName     String        @db.VarChar(50)
+  DateCreated  DateTime?
+  DateModified DateTime?
+  TB_otp       TB_otp[]
+  TB_UserRole  TB_UserRole[]
+}
+
+model TBM_Role {
+  RoleID      String        @id(map: "PK__TBM_Role__8AFACE3A5F13C123") @db.VarChar(50)
+  RoleName    String?       @unique(map: "UQ__TBM_Role__8A2B6160CEBC4FD1") @db.VarChar(50)
+  TB_UserRole TB_UserRole[]
+}
