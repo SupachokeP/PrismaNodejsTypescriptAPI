@@ -143,7 +143,7 @@ const config = {
       "value": "prisma-client-js"
     },
     "output": {
-      "value": "C:\\Users\\idtim\\Desktop\\Coding\\Checkmate_api\\src\\prisma\\generated\\prisma-client",
+      "value": "C:\\Users\\idtim\\Desktop\\Coding\\PrismaNodejsTypescriptAPI\\Checkmate_api\\src\\prisma\\generated\\prisma-client",
       "fromEnvVar": null
     },
     "config": {
@@ -169,7 +169,7 @@ const config = {
     "isCustomOutput": true
   },
   "relativeEnvPaths": {
-    "rootEnvPath": "../../../../.env",
+    "rootEnvPath": null,
     "schemaEnvPath": "../../../../.env"
   },
   "relativePath": "../..",
