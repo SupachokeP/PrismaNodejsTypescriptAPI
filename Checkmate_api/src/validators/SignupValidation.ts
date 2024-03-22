@@ -3,7 +3,7 @@
 import { body, ValidationChain } from "express-validator";
 
 export const signupValidation: ValidationChain[] = [
-  body("userID").notEmpty().withMessage("User ID is required"),
+  body("userId").notEmpty().withMessage("User ID is required"),
   body("email").isEmail().withMessage("Invalid email address"),
   body("phone")
     .isLength({ max: 10 })

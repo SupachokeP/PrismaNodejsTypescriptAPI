@@ -7,7 +7,7 @@ export const sqlConnection = async () => {
     const sqlConfig = {
       user: "dev2",
       password: "1234",
-      database: "Checkmate_test",
+      database: "Checkmate_dev",
       server: "localhost",
       pool: {
         max: 10,
